@@ -1,19 +1,21 @@
-package com.example.practice.entity;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.GenerationType;
-
+package com.example.demo.entity;
+import jakarta.persistence.*;
+@Entity
+@Table(name = "Student")
 public class StudentEntity {
-@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Id
+    @GeneratedValue(startegy=GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = "should not contain spaces")
+    @Column(unique=true)
     private String name;
+    @NotBlank(message = "not spaces")
+    @Email(message = "invalid format")
     private String email;
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
@@ -28,13 +30,12 @@ public class StudentEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-    public StudentEntity(int id, String name, String email) {
+    public NewfileEntity(Long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
-
-    public StudentEntity() {
+    public NewfileEntity() {
     }
     
 }
