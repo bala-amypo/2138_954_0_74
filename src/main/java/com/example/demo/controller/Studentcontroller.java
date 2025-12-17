@@ -1,4 +1,7 @@
-packagecom.exampe.practice.controller;
+package com.example.practice.controller;
+
+import java.util.List;
+import jva.util.Optional;
 
 @RestController
 public class Studentcontroller{
@@ -45,7 +48,14 @@ public class Studentcontroller{
         delete(@PathVariable int id){
             Optional<StudentEntity>
             student=studentservice.getStudentById(id);
-            if(student.isPresent()
+            if(student.isPresent()){
+                studentservice.deleteStudent-ById(id);
+                return"Student deleted successfully";
+            }
+            else{
+                return "Student not found";
+            }
+            
         }
 
         }
