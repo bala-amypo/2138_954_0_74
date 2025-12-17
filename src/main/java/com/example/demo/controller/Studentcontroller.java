@@ -36,8 +36,20 @@ public class Studentcontroller{
             return "Student updated successfully";
         }
         else{
-            return ""
+            return "Student not found";
         }
+
+        };
+        @DeleteMapping("/delete/{id}")
+        public string 
+        delete(@PathVariable int id){
+            Optional<StudentEntity>
+            student=studentservice.getStudentById(id);
+            if(student.isPresent()
+        }
+
+        }
+
         }
     }
 }
