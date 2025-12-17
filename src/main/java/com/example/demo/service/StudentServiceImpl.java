@@ -5,15 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.StudentEntity;
-import com.example.demo.repository.StudentRespository;
+import com.example.demo.repository.StudentRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final StudentRespository rep;
+    private final StudentRepository rep;
 
-    // Constructor Injection (correct way)
-    public StudentServiceImpl(StudentRespository rep) {
+    public StudentServiceImpl(StudentRepository rep) {
         this.rep = rep;
     }
 

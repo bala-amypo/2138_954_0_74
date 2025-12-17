@@ -9,33 +9,28 @@ import com.example.demo.service.StudentService;
 
 @RestController
 @RequestMapping("/student")
-public class Studentcontroller {
+public class StudentController {
 
     private final StudentService service;
 
-    
-    public Studentcontroller(StudentService service) {
+    public StudentController(StudentService service) {
         this.service = service;
     }
-
 
     @PostMapping("/save")
     public StudentEntity save(@RequestBody StudentEntity student) {
         return service.savedata(student);
     }
 
- 
     @GetMapping("/{id}")
     public StudentEntity getById(@PathVariable Long id) {
         return service.getidval(id);
     }
 
- 
     @GetMapping("/all")
     public List<StudentEntity> getAll() {
         return service.getall();
     }
-
 
     @PutMapping("/update/{id}")
     public StudentEntity update(
@@ -43,7 +38,6 @@ public class Studentcontroller {
             @RequestBody StudentEntity student) {
         return service.update(id, student);
     }
-
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
