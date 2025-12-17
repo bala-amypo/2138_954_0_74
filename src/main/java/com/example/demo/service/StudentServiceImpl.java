@@ -1,34 +1,51 @@
 package com.example.demo.service;
 
-import java.util.*;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.StudentEntity;
+import com.example.demo.repository.StudentRespository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final Map<Long, StudentEntity> store = new HashMap<>();
-    private long counter = 1;
+    private final StudentRespository rep;
 
-    @Override
-    public StudentEntity insertStudent(StudentEntity st) {
-        st.setId(counter++);
-        store.put(st.getId(), st);
-        return st;
+    // Constructor Injection (correct way)
+    public StudentServiceImpl(StudentRespository rep) {
+        this.rep = rep;
     }
 
     @Override
-    public List<StudentEntity> getAllStudents() {
-        return new ArrayList<>(store.values());
+    public StudentEntity savedata(StudentEntity student) {
+        return rep.save(student);
     }
 
     @Override
-    public Optional<StudentEntity> getOneStudent(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public StudentEntity getidval(Long id) {
+        return rep.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteStudent(Long id) {
-        store.remove(id);
+    public List<StudentEntity> getall() {
+        return rep.findAll();
+    }
+
+    @Override
+    public StudentEntity update(Long id, StudentEntity student) {
+        StudentEntity existing = getidval(id);
+
+        if (existing != null) {
+            existing.setName(student.getName());
+            existing.setEmail(student.getEmail());
+            return rep.save(existing);
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        rep.deleteById(id);
     }
 }
