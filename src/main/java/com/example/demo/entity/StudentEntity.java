@@ -13,8 +13,7 @@ public class Student {
     private Long id;
     private String name;
     private String email;
-    private LocalDate dob;
-    private Float cgpa;
+
 
 
     public Long getId() {
