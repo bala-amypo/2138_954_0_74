@@ -6,10 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-
 @Entity
-
 public class Student {
 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,24 +41,7 @@ public class Student {
         this.email = email;
     }
 
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public Float getCgpa() {
-        return cgpa;
-    }
-
-    public void setCgpa(Float cgpa) {
-        this.cgpa = cgpa;
-    }
-    public Student(Float cgpa, LocalDate dob, String email, Long id, String name) {
-        this.cgpa = cgpa;
-        this.dob = dob;
+    public Student(String email, Long id, String name) {
         this.email = email;
         this.id = id;
         this.name = name;
