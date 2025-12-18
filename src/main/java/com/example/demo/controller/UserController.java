@@ -5,58 +5,57 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.Vehicle;
-import com.example.demo.service.VehicleService;
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
 
 @RestController
-@RequestMapping("/vehicles")
-public class VehicleController {
+@RequestMapping("/users")
+public class UserController {
 
-    private final VehicleService vehicleService;
+    private final UserService userService;
 
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.insertVehicle(vehicle);
+    public User createUser(@RequestBody User user) {
+        return userService.insertUser(user);
     }
 
     @GetMapping
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public Optional<Vehicle> getVehicleById(@PathVariable Long id) {
-        return vehicleService.getOneVehicle(id);
+    public Optional<User> getUserById(@PathVariable Long id) {
+        return userService.getOneUser(id);
     }
 
     @PutMapping("/{id}")
-    public String updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
-        Optional<Vehicle> vehicleOpt = vehicleService.getOneVehicle(id);
+    public String updateUser(@PathVariable Long id, @RequestBody User user) {
+        Optional<User> userOpt = userService.getOneUser(id);
 
-        if (vehicleOpt.isPresent()) {
-            Vehicle existingVehicle = vehicleOpt.get();
-            existingVehicle.setBrand(vehicle.getBrand());
-            existingVehicle.setModel(vehicle.getModel());
-            existingVehicle.setNumber(vehicle.getNumber());
-            existingVehicle.setType(vehicle.getType());
-            vehicleService.insertVehicle(existingVehicle);
-            return "Updated Successfully";
+        if (userOpt.isPresent()) {
+            User existingUser = userOpt.get();
+            existingUser.setUsername(user.getUsername());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPassword(user.getPassword());
+            userService.insertUser(existingUser);
+            return "User Updated Successfully";
         }
-        return "Vehicle Not Found";
+        return "User Not Found";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteVehicle(@PathVariable Long id) {
-        Optional<Vehicle> vehicle = vehicleService.getOneVehicle(id);
+    public String deleteUser(@PathVariable Long id) {
+        Optional<User> user = userService.getOneUser(id);
 
-        if (vehicle.isPresent()) {
-            vehicleService.deleteVehicle(id);
-            return "Deleted Successfully";
+        if (user.isPresent()) {
+            userService.deleteUser(id);
+            return "User Deleted Successfully";
         }
-        return "Vehicle Not Found";
+        return "User Not Found";
     }
 }
