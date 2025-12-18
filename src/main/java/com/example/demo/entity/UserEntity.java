@@ -1,4 +1,3 @@
-`java
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -18,7 +17,7 @@ public class UserEntity {
     private String password;
 
     @Column(nullable = false)
-    private String role; // e.g., USER or ADMIN
+    private String role; 
 
     public UserEntity() {}
 
@@ -28,7 +27,6 @@ public class UserEntity {
         this.role = role;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
